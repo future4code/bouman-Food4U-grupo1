@@ -10,7 +10,7 @@ export default async function signupEndpoint(req: Request, res: Response) {
             password: req.body.password
         })
 
-        res.send(result)
+        res.send("Usuário criado")
     } catch (err) {
         res.send(err.message)
     }
