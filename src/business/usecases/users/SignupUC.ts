@@ -1,5 +1,7 @@
 import UserDB from "../../../data/UserDatabase";
 import User from "../../entities/User";
+import {v4} from "uuid"; 
+import * as bcrypt from 'bcrypt';
 
 interface SignupInput {
     email: string
@@ -12,6 +14,9 @@ export default class SignupUC {
     ) { }
 
     async execute(input: SignupInput) {
-        await this.database.signup(new User)
+        const id = v4()
+        const rounds = 10
+        const hash = await bcrypt.hash(input.password, rounds)
+        await this.database.signup(new User(id, input.email, hash))
     }
 }
