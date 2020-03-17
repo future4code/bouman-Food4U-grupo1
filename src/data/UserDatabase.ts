@@ -7,7 +7,8 @@ export default class UserDB extends MainDB {
     }
 
     async getUserByEmail(email: string){
-        const query = await this.connection.raw(`SELECT password from USERS WHERE email = "${email}"`)
+        const query = await this.connection.raw(`SELECT id, password from USERS WHERE email = "${email}"`)
         return query[0][0]
     }
+
 }
