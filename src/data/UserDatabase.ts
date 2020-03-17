@@ -11,4 +11,12 @@ export default class UserDB extends MainDB {
         return query[0][0]
     }
 
+    async follow(followerId:string, userToFollowId:string){
+        await this.connection.raw(
+            `INSERT INTO FOLLOWERS VALUES (
+                "${followerId}",
+                "${userToFollowId}"
+            )`
+        )
+    }
 }
