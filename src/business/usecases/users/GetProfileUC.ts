@@ -8,9 +8,7 @@ export default class GetProfileUC {
 
     async execute(token: any) {
         const jwtSecretKey: string = "bananinha"
-        const jwtData = jwt.verify(token as string, jwtSecretKey) as {
-            email: string
-        }
+        const jwtData = jwt.verify(token as string, jwtSecretKey) 
         return jwtData
     }    
 }
