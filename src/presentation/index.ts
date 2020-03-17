@@ -8,6 +8,6 @@ app.use(express.json());
 
 app.post('/signup', signupEndpoint)
 app.post('/login', loginEndpoint)
-app.get('/getProfile', getProfileEndpoint)
+app.get('/profile', getProfileEndpoint)
 
 export default app;
