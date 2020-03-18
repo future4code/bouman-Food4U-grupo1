@@ -16,7 +16,7 @@ export default class LoginUC {
     async execute(input: LoginInput) {
         const userInfo = await this.database.getUserByEmail(input.email) 
         const isPasswordCorrect = await bcrypt.compare(input.password, userInfo.password)
-        const jwtSecretKey: string = "bananinha"
+        const jwtSecretKey = process.env.JWT_KEY as string
         if(isPasswordCorrect){
             const token = jwt.sign({id: userInfo.id, email: input.email}, jwtSecretKey, {expiresIn: "1h"})
             return {
