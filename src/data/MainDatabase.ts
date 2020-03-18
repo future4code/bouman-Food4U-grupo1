@@ -6,7 +6,7 @@ export default class MainDB {
     connection: {
     host: 'ec2-18-229-236-15.sa-east-1.compute.amazonaws.com',
     user: 'mateus',
-    password: 'fI8OWWG88KbgQHru7e2A',
+    password: process.env.DATABASE_PASSWORD,
     database: 'bouman-mateus'
     }
     })
