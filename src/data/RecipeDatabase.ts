@@ -15,4 +15,18 @@ export default class RecipeDB extends MainDB {
         )
     }
 
+    async getFeed(id:string){
+        const query = await this.connection.raw(
+            `SELECT email, title, description, creation_date FROM FOLLOWERS 
+            JOIN RECIPES ON user_id = author_id
+            JOIN USERS ON author_id = USERS.id
+            WHERE follower_id = "${id}"
+            ORDER BY creation_date;
+            
+            `
+        )
+
+        return query[0]
+    }
+
 }
