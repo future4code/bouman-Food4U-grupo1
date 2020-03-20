@@ -14,9 +14,9 @@ export default class UserDB extends MainDB {
 
     async getUserByEmail(email: string) {
         const query = await this.connection.raw(
-            `SELECT id, email, name, birth_date 
+            `SELECT id, password, email, name, birth_date 
             FROM USERS WHERE email = "${email}"`
-            )
+        )
         return query[0][0]
     }
 
@@ -27,5 +27,17 @@ export default class UserDB extends MainDB {
                 "${userToFollowId}"
             )`
         )
+    }
+
+    async changePassword(email: string, newPassword: string) {
+        try{
+            await this.connection.raw(`
+                UPDATE USERS
+                SET password = "${newPassword}"
+                WHERE email = "${email}"
+            `)
+        } catch (err){
+            throw new Error(err.sqlMessage)
+        }
     }
 }
