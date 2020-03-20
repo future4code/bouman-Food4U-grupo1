@@ -5,9 +5,11 @@ import UserDB from '../../../data/UserDatabase'
 export default async function signupEndpoint(req: Request, res: Response) {
     const useCase = new SignupUC(new UserDB())
     try {
-        const result = await useCase.execute({
+        await useCase.execute({
+            name: req.body.name,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            birthDate: req.body.birthDate
         })
 
         res.send("Usuário criado")

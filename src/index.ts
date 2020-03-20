@@ -1,5 +1,6 @@
 import { AddressInfo } from "net";
 import app from "./presentation/index";
+
 require("dotenv/config")
 
 // Trecho do código responsável por inicializar todas as APIs

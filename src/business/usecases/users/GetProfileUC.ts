@@ -7,8 +7,17 @@ export default class GetProfileUC {
     ) { }
 
     async execute(token: any) {
-        const jwtSecretKey: string = "bananinha"
-        const jwtData = jwt.verify(token as string, jwtSecretKey) 
-        return jwtData
-    }    
+
+        const jwtSecretKey: string = process.env.JWT_KEY as string
+        const jwtData = jwt.verify(
+            token as string, 
+            jwtSecretKey
+        ) as { 
+            id: string, 
+            email: string 
+        }
+
+        const user = await this.database.getUserByEmail(jwtData.email)
+        return user
+    }
 }
