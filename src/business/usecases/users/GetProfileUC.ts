@@ -10,14 +10,19 @@ export default class GetProfileUC {
 
         const jwtSecretKey: string = process.env.JWT_KEY as string
         const jwtData = jwt.verify(
-            token as string, 
+            token as string,
             jwtSecretKey
-        ) as { 
-            id: string, 
-            email: string 
+        ) as {
+            id: string,
+            email: string
         }
 
         const user = await this.database.getUserByEmail(jwtData.email)
-        return user
+        return {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            birthDate: user.birth_date
+        }
     }
 }
